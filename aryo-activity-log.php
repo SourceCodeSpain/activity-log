@@ -1,13 +1,17 @@
 <?php
 /*
-Plugin Name: Activity Log
-Plugin URI: https://activitylog.io/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash
-Description: This top rated Activity Log plugin helps you monitor & log all changes and actions on your WordPress site, so you can remain secure and organized.
-Author: Activity Log Team
-Author URI: https://activitylog.io/?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash
-Version: 2.11.2
+Plugin Name: Activity Log (SourceCode)
+Plugin URI: https://github.com/SourceCodeSpain/activity-log
+Description: This top rated Activity Log plugin helps you monitor & log all changes and actions on your WordPress site, so you can remain secure and organized. SourceCode-maintained fork.
+Author: SourceCode
+Author URI: https://sourcecode.es
+Version: 2.11.3-sc
 Text Domain: aryo-activity-log
+Update URI: https://github.com/SourceCodeSpain/activity-log
 License: GPLv2 or later
+
+Forked and maintained by SourceCode from "Activity Log" by the Activity Log Team
+(https://activitylog.io), originally by Pojo.me. Distributed under GPLv2 or later.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,6 +32,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 define( 'ACTIVITY_LOG__FILE__', __FILE__ );
 define( 'ACTIVITY_LOG_BASE', plugin_basename( ACTIVITY_LOG__FILE__ ) );
+
+/**
+ * SourceCode fork: self-hosted updates from the GitHub repo.
+ * Together with the "Update URI" header this detaches the plugin from the
+ * wordpress.org updater and pulls updates from tagged releases on the fork.
+ * Library: Plugin Update Checker by Yahnis Elsts (MIT).
+ */
+if ( file_exists( __DIR__ . '/vendor/plugin-update-checker/plugin-update-checker.php' ) ) {
+	require_once __DIR__ . '/vendor/plugin-update-checker/plugin-update-checker.php';
+	$aal_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+		'https://github.com/SourceCodeSpain/activity-log/',
+		ACTIVITY_LOG__FILE__,
+		'aryo-activity-log'
+	);
+}
 
 include( 'classes/class-aal-maintenance.php' );
 include( 'classes/class-aal-activity-log-list-table.php' );
